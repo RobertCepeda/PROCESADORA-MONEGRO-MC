@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PROCESADORA MONEGRO MC</title>
+    <script type="module" crossorigin src="./assets/index-I65HLV-U.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-DHX0J36x.css">
+  </head>
+  <body>
+    <div id="root">
+      <div style="min-height:100vh;display:grid;place-items:center;background:#eef8f2;color:#043321;font-family:Inter,Arial,sans-serif">
+        <div style="width:min(440px,90vw);padding:28px;border:1px solid #cce6d5;border-radius:18px;background:#fff;box-shadow:0 22px 60px rgba(5,57,35,.12);text-align:center">
+          <strong style="display:block;font-size:22px;margin-bottom:8px">PROCESADORA MONEGRO MC</strong>
+          <span style="color:#557064">Cargando panel...</span>
+        </div>
+      </div>
+    </div>
+    <script>
+      const showStaticError = (message) => {
+        const root = document.getElementById("root");
+        if (!root) return;
+        root.innerHTML = `<div style="min-height:100vh;display:grid;place-items:center;background:#eef8f2;color:#043321;font-family:Inter,Arial,sans-serif"><div style="width:min(560px,92vw);padding:28px;border:1px solid #f0b8b8;border-radius:18px;background:#fff;box-shadow:0 22px 60px rgba(5,57,35,.12)"><strong style="display:block;font-size:22px;margin-bottom:10px">No se pudo cargar la pagina</strong><p style="margin:0 0 12px;color:#557064">Verifica que subiste todos los archivos generados, especialmente la carpeta <b>data</b> y la carpeta <b>assets</b>.</p><pre style="white-space:pre-wrap;background:#fff4f4;border:1px solid #ffd1d1;border-radius:10px;padding:12px;color:#9b1c1c">${String(message || "Error desconocido")}</pre></div></div>`;
+      };
+      window.addEventListener("error", (event) => showStaticError(event.message));
+      window.addEventListener("unhandledrejection", (event) => showStaticError(event.reason?.message || event.reason));
+    </script>
+  </body>
+</html>
