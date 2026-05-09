@@ -58,6 +58,31 @@ Esta carpeta ya esta lista para subir a GitHub Pages. Si en el futuro regeneras 
 
 ```cmd
 node scripts\export-github-pages-demo.js
-npm.cmd --prefix github-pages-src run build -- --base ./ --outDir "../git-hub page" --emptyOutDir
-Compress-Archive -Path "git-hub page\*" -DestinationPath "git-hub page.zip" -Force
+set VITE_STATIC_DEMO=1
+npm.cmd --prefix frontend run build -- --base ./ --outDir "../tmp/github-page-build" --emptyOutDir
+```
+
+Luego copia el build generado dentro de esta carpeta `git-hub page`:
+
+```powershell
+Remove-Item -LiteralPath ".\git-hub page\assets" -Recurse -Force
+Copy-Item -LiteralPath ".\tmp\github-page-build\assets" -Destination ".\git-hub page\assets" -Recurse -Force
+Copy-Item -LiteralPath ".\tmp\github-page-build\index.html" -Destination ".\git-hub page\index.html" -Force
+New-Item -ItemType File -Path ".\git-hub page\.nojekyll" -Force
+```
+
+## Subir cambios
+
+Desde dentro de esta carpeta:
+
+```cmd
+git add .
+git commit -m "Actualizar pagina estatica"
+git push
+```
+
+Si Git muestra `dubious ownership`, ejecuta una sola vez:
+
+```cmd
+git config --global --add safe.directory "C:/Desktop/APLICACION ASISTENCIA/git-hub page"
 ```
