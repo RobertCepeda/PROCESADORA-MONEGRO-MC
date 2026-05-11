@@ -15,7 +15,7 @@ Esta carpeta es una copia estatica de la aplicacion para publicarla en GitHub Pa
 - Reportes y auditoria.
 - Datos exportados desde PostgreSQL en la carpeta `data`.
 - Fotos demo exportadas en la carpeta `uploads`.
-- Datos actuales: 24 sucursales, 117 usuarios, 5,531 reportes de produccion, 54,001 detalles de produccion, 193,458 ventas y 1,603 asistencias.
+- Datos actuales: 24 sucursales, 113 usuarios, 5,531 reportes de produccion, 54,001 detalles de produccion, 193,458 ventas y 1,575 asistencias.
 
 ## Importante
 
