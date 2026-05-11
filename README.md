@@ -14,6 +14,7 @@ Esta carpeta es una copia estatica de la aplicacion para publicarla en GitHub Pa
 - Organizacion.
 - Reportes y auditoria.
 - Datos exportados desde PostgreSQL en la carpeta `data`.
+- Fotos demo exportadas en la carpeta `uploads`.
 
 ## Importante
 
@@ -32,6 +33,7 @@ index.html
 .nojekyll
 assets
 data
+uploads
 README.md
 ```
 
@@ -46,6 +48,8 @@ sales-002.json
 sales-003.json
 sales-004.json
 ```
+
+La carpeta `uploads` tambien debe subirse completa para que se vean las fotos de produccion en GitHub Pages.
 
 ## Credenciales demo
 
@@ -68,6 +72,8 @@ Luego copia el build generado dentro de esta carpeta `git-hub page`:
 Remove-Item -LiteralPath ".\git-hub page\assets" -Recurse -Force
 Copy-Item -LiteralPath ".\tmp\github-page-build\assets" -Destination ".\git-hub page\assets" -Recurse -Force
 Copy-Item -LiteralPath ".\tmp\github-page-build\index.html" -Destination ".\git-hub page\index.html" -Force
+if (Test-Path -LiteralPath ".\git-hub page\uploads") { Remove-Item -LiteralPath ".\git-hub page\uploads" -Recurse -Force }
+Copy-Item -LiteralPath ".\backend\uploads" -Destination ".\git-hub page\uploads" -Recurse -Force
 New-Item -ItemType File -Path ".\git-hub page\.nojekyll" -Force
 ```
 
