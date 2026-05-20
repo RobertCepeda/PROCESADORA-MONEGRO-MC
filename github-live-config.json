@@ -1,0 +1,6 @@
+{
+  "mode": "live-backend",
+  "staticDemo": false,
+  "apiUrl": "http://localhost:4000/api",
+  "generatedAt": "2026-05-20T16:05:21.435Z"
+}

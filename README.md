@@ -1,80 +1,50 @@
 # PROCESADORA MONEGRO MC - GitHub Pages
 
-Esta carpeta es una copia estatica de la aplicacion para publicarla en GitHub Pages.
+Esta carpeta contiene la version web lista para subir a GitHub Pages, pero ahora funciona en modo conectado al backend. Ya no incluye la copia pesada de base de datos en archivos JSON.
 
 ## Que incluye
 
-- Pantalla de login corporativa.
-- Panel admin.
-- Produccion.
-- Ventas.
-- Produccion vs venta.
-- Asistencia.
-- Empleados.
-- Organizacion.
-- Reportes y auditoria.
-- Datos exportados desde PostgreSQL en la carpeta `data`.
-- Fotos demo exportadas en la carpeta `uploads`.
-- Datos actuales: 24 sucursales, 114 usuarios, 5,615 reportes de produccion, 54,983 detalles de produccion, 193,458 ventas y 2,196 asistencias.
+- `index.html`
+- `404.html`
+- `.nojekyll`
+- `assets`
+- `github-live-config.json`
 
-## Importante
+## Que ya no debe incluir
 
-- No usa PostgreSQL en GitHub Pages.
-- No usa backend.
-- No sincroniza cambios con tu PC.
-- Los cambios que hagas en la pagina publicada son temporales en el navegador.
-- La base estatica esta dividida en varios JSON para evitar pantalla en blanco y errores por archivos grandes.
-
-## Archivos obligatorios para subir
-
-Sube todo el contenido de `git-hub page`, incluyendo:
+No subas ni vuelvas a crear estas carpetas dentro de `git-hub page`:
 
 ```txt
-index.html
-.nojekyll
-assets
 data
 uploads
-README.md
 ```
 
-Dentro de `data` deben estar:
+La carpeta `data` era una copia estatica de PostgreSQL para demo sin backend. Esa copia puede hacer pesada la pagina y provocar congelamientos si el navegador intenta cargar demasiada informacion.
+
+La carpeta `uploads` tampoco debe ir en el codigo. Las imagenes deben viajar por la API y guardarse en la base de datos o en el almacenamiento configurado, no como archivos versionados dentro del frontend.
+
+## Regenerar esta carpeta
+
+Desde la carpeta principal de la app:
+
+```cmd
+npm run github:prepare
+```
+
+Ese comando compila el frontend con:
 
 ```txt
-database-index.json
-core.json
-production.json
-sales-001.json
-sales-002.json
-sales-003.json
-sales-004.json
+VITE_STATIC_DEMO=0
+VITE_API_URL=http://localhost:4000/api
 ```
 
-La carpeta `uploads` tambien debe subirse completa para que se vean las fotos de produccion en GitHub Pages.
+Si vas a publicar esta version para uso real en internet, cambia `VITE_API_URL` por la URL publica de tu backend antes de regenerar.
 
-## Credenciales demo
-
-- Admin: `Gerencia@procesadoramonegro.com`
-- Contrasena: cualquier texto en esta copia estatica
-
-## Regenerar la copia
-
-Esta carpeta ya esta lista para subir a GitHub Pages. Si en el futuro regeneras otra copia desde la app local, usa el mismo nombre de carpeta final:
+Ejemplo:
 
 ```powershell
-node scripts\export-github-pages-demo.js
-$env:VITE_STATIC_DEMO="1"
-npm.cmd --prefix frontend run build -- --base ./ --outDir "../tmp/github-build" --emptyOutDir
-```
-
-Luego copia el build generado dentro de esta carpeta `git-hub page`:
-
-```powershell
-Get-ChildItem -Path ".\git-hub page\assets" -Filter "index-*.*" | Remove-Item -Force
-Copy-Item -Path ".\tmp\github-build\assets\*" -Destination ".\git-hub page\assets" -Force
-Copy-Item -Path ".\tmp\github-build\index.html" -Destination ".\git-hub page\index.html" -Force
-Copy-Item -Path ".\backend\uploads\*" -Destination ".\git-hub page\uploads" -Force
-New-Item -ItemType File -Path ".\git-hub page\.nojekyll" -Force
+$env:VITE_API_URL="https://TU-BACKEND-PUBLICO.com/api"
+npm run github:prepare
 ```
 
 ## Subir cambios
@@ -83,7 +53,7 @@ Desde dentro de esta carpeta:
 
 ```cmd
 git add .
-git commit -m "Actualizar pagina estatica"
+git commit -m "Actualizar pagina conectada al backend"
 git push
 ```
 
@@ -92,3 +62,13 @@ Si Git muestra `dubious ownership`, ejecuta una sola vez:
 ```cmd
 git config --global --add safe.directory "C:/Desktop/APLICACION ASISTENCIA/git-hub page"
 ```
+
+## Nota
+
+La demo estatica vieja sigue existiendo solo como herramienta opcional:
+
+```cmd
+npm run github:prepare-static
+```
+
+Usala solamente si quieres una pagina sin backend y aceptas que no sincronice datos.
