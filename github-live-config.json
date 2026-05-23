@@ -1,6 +1,6 @@
 {
   "mode": "live-backend",
   "staticDemo": false,
-  "apiUrl": "http://localhost:4000/api",
-  "generatedAt": "2026-05-20T16:05:21.435Z"
+  "apiUrl": "https://procesadora-api-363002432431.us-central1.run.app/api",
+  "generatedAt": "2026-05-23T00:38:00.912Z"
 }
